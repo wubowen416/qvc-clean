@@ -44,10 +44,9 @@ jvs_wav_preprocessed
 |--...
 ```
 
-You should also have two reference files containing a list of the files in `jvs_wav_preprocessed`, as shown in `datasets/jvs/jvs_preprocessed_train.txt` and `datasets/jvs/jvs_preprocessed_val.txt`.
-These files are used in training to refer to audio files in `jvs_wav_preprocessed`.
+There are two reference files (`datasets/jvs/jvs_preprocessed_{train/val}.txt`) containing a list of files in `jvs_wav_preprocessed`, which are used to refer to audio files for training.
 
-Note that in our reference files, the root path is set to `data/jvs`. If you wish to use them directly, please place the preprocessed dataset `jvs_wav_preprocessed` under `data/jvs`.
+Note that in the reference files, the root path for audios is set to `data/jvs`. If you wish to use them directly, please place the preprocessed dataset `jvs_wav_preprocessed` under `data/jvs`.
 If you decided to use your own reference files, please change the file paths for reference files in the training config file, e.g., in `configs/qvc_hubert.json`, change `data/training_files` and `data/validation_files` to your own file path.
 
 ### Preprocess audio files
@@ -58,7 +57,7 @@ Since these pretrained models will not be updated during training, we extract th
 To do this, run the following command to preprocess:
 
 ```bash
-python scripts/preprocess_weo.py --wav-dirpath data/jvs/jvs_wav_preprocessed --mode hubert
+python scripts/preprocess/preprocess_weo.py --wav-dirpath data/jvs/jvs_wav_preprocessed --mode hubert
 ```
 
 Prameters:
@@ -107,7 +106,7 @@ Parameters:
 - `--txtpath`: the txt file containing audios you want to convert as well as their target audios.
 - `--outdir`: the directory where you want to store the converted audios.
 
-We provide a (not well) pretrained checkpoint based on hubert which can be downloaded from [this url](https://drive.google.com/file/d/1F-w8k7YBETHeelXmSDUniJzkeLMRjT5h/view?usp=share_link).
+We provide a (not fully) pretrained checkpoint based on hubert which can be downloaded from [this url](https://drive.google.com/file/d/1F-w8k7YBETHeelXmSDUniJzkeLMRjT5h/view?usp=share_link).
 Please unzip the checkpoint and place it under `logs` as `logs/qvc_hubert`.
 
 ## Acknowledgement
