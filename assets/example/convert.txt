@@ -1,0 +1,2 @@
+test1|assets/example/audios/jvs097/BASIC5000_0477.wav|assets/example/audios/jvs095/VOICEACTRESS100_070.wav
+test2|assets/example/audios/jvs095/VOICEACTRESS100_070.wav|assets/example/audios/jvs097/BASIC5000_0477.wav
