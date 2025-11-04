@@ -1,6 +1,8 @@
 # Quick-Voice-Conversion
 
-My implementation of any-to-many voice conversion adapted from [QVC](https://github.com/quickvc/QuickVC-VoiceConversion).
+My implementation of [QuickVC](https://github.com/quickvc/QuickVC-VoiceConversion), a deep learning based model for any-to-many voice conversion.
+
+The [original implementation](https://github.com/quickvc/QuickVC-VoiceConversion) is a bit messy thus hard to extend, this version is cleaner and well-documented, providing a cleaner base for further development.
 
 ## Environment
 
@@ -89,7 +91,9 @@ CUDA_VISABLE_DEVICES=0 python scripts/train/train.py -c configs/qvc_hubert.json 
 
 We provide a script to convert a list of audios to their corresponding target audio via a txt file.
 An example can be found in `assets/example/convert.txt`.
-You can adapt this file for you own batched conversion using the following command:
+You can adapt this file for you own batched conversion.
+
+Convert audios using the following command:
 
 ```bash
 python scripts/infer/convert.py \
