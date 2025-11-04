@@ -93,6 +93,9 @@ We provide a script to convert a list of audios to their corresponding target au
 An example can be found in `assets/example/convert.txt`.
 You can adapt this file for you own batched conversion.
 
+We palso rovide a (not fully) pretrained checkpoint based on hubert which can be downloaded from [this url](https://drive.google.com/file/d/1F-w8k7YBETHeelXmSDUniJzkeLMRjT5h/view?usp=share_link).
+Please unzip the checkpoint and place it under `logs` as `logs/qvc_hubert`.
+
 Convert audios using the following command:
 
 ```bash
@@ -109,9 +112,6 @@ Parameters:
 - `--ptfile`: the checkpoint file for the generator you want to use.
 - `--txtpath`: the txt file containing audios you want to convert as well as their target audios.
 - `--outdir`: the directory where you want to store the converted audios.
-
-We provide a (not fully) pretrained checkpoint based on hubert which can be downloaded from [this url](https://drive.google.com/file/d/1F-w8k7YBETHeelXmSDUniJzkeLMRjT5h/view?usp=share_link).
-Please unzip the checkpoint and place it under `logs` as `logs/qvc_hubert`.
 
 ## Acknowledgement
 
