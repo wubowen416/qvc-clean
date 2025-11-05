@@ -34,26 +34,47 @@ We provide an experiment using [JVS corpus](https://sites.google.com/site/shinno
 
 ### Prepare audio files
 
-We rely on `jvs_wav_preprocessed` containing folders of audio files of each speaker, which looks like follows:
+Download JVS corpus from [url](https://drive.google.com/file/d/19oAw8wWn3Y7z6CKChRdAyGOB9yupL_Xt/view) and unzip it.
+The file structure should look like this:
+
+```txt
+jvs_ver1
+|--jvs001
+|  |--falset10
+|  |  |--wav24kHz16bit
+|  |  |  |--BASIC5000_0235.wav
+|  |  |  |--VOICEACTRESS100_001.wav
+|  |  |  |--...
+...
+```
+
+We only use the audio files in `nonpara30` and `parallel100` as these are normal utterances, ignoring `falset10` and `whisper10` which are abnormal utterances.
+Also, we downsample the audios to 16kHz to be compatible with QVC.
+Run the following script to extract all audio files and do the downsampling:
+
+```bash
+python scripts/preprocess/preprocess_wav.py --jvs-dirpath data/jvs/jvs_ver1 --out-dirpath data/jvs/jvs_wav_preprocessed --dataset-dirpath datasets/jvs
+```
+
+The preprocessed directory should look like this:
 
 ```txt
 jvs_wav_preprocessed
 |--jvs001
-|   |--BASIC5000_0025.wav
-    |--...
+|  |--BASIC5000_0025.wav
+|  |--...
 |--jvs002
-    |--...
+|  |--...
 |--...
 ```
 
-There are two reference files (`datasets/jvs/jvs_preprocessed_{train/val}.txt`) containing a list of files in `jvs_wav_preprocessed`, which are used to refer to audio files for training.
-
-Note that in the reference files, the root path for audios is set to `data/jvs`. If you wish to use them directly, please place the preprocessed dataset `jvs_wav_preprocessed` under `data/jvs`.
-If you decided to use your own reference files, please change the file paths for reference files in the training config file, e.g., in `configs/qvc_hubert.json`, change `data/training_files` and `data/validation_files` to your own file path.
+The script also produces two reference files (`datasets/jvs/jvs_preprocessed_{train/val}.txt`) containing a list of audio files in the output directory.
+The train/test splitting is random.
+These files will be refered in the training config file (e.g., `configs/qvc_hubert.json`, field ``data/{training/validation}_files``) as reference for audio files used in the training.
 
 ### Preprocess audio files
 
-QVC relies on pretrained models for speech content feature extraction for more details refer to [their paper](https://arxiv.org/abs/2302.08296).
+QVC relies on pretrained models for speech content feature extraction, for more details refer to [their paper](https://arxiv.org/abs/2302.08296).
 Since these pretrained models will not be updated during training, we extract their extracted features before hand to avoid runtime processing during training for speeding up. These extracted featurse will only be loaded during training.
 
 To do this, run the following command to preprocess:
